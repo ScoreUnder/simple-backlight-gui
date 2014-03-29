@@ -9,11 +9,11 @@ if [ ! -w "${BL[0]}/brightness" ]; then
         }
 
         SUDO=no_sudo
-        if which gksudo > /dev/null 2>&1; then SUDO=gksudo
-        elif which kdesu > /dev/null 2>&1; then SUDO=kdesu
+        if which gksudo > /dev/null 2>&1; then SUDO='exec gksudo'
+        elif which kdesu > /dev/null 2>&1; then SUDO='exec kdesu'
         fi
 
-        exec $SUDO "$0" "no-sudo"
+        $SUDO "$0" "no-sudo"
     fi
 
     zenity --error --text="Can't alter the brightness"
